@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
-const config = require('./server/config/key');
+const config = require('./config/key');
 
-const { User } = require('./server/models/user');
-const { auth } = require('./server/middleware/auth');
+const { User } = require('./models/user');
+const { auth } = require('./middleware/auth');
 
 mongoose.connect(config.mongoURI,{useNewUrlParser: true})
     .then(() => console.log('DB connected'))
