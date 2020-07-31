@@ -18,9 +18,9 @@ app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.get("/", (req, res)=>{
-    res.json({"hello" : " I am happy to deploy our application"})
-})
+app.get('/', (req, res)=>{
+    res.json({"hello" : " I am happy to deploy our application"});
+});
 
 app.get('/api/user/auth', auth, (req, res) =>{
     
@@ -35,9 +35,9 @@ app.get('/api/user/auth', auth, (req, res) =>{
 
 });
 
-app.post("/api/users/register", (req, res) =>{
+app.post('/api/users/register', (req, res) =>{
     
-    const user = new User(req.body)
+    const user = new User(req.body);
     user.save((err, doc) => {
         if(err) return res.json ({success: false, err});
         res.status(200).json({
@@ -69,7 +69,7 @@ app.post('/api/user/login', (req, res) => {
         //generate-token
         user.generateToken((err, user) =>{
             if(err) return res.status(400).send(err);
-            res.cookie("x_auth", user.token)
+            res.cookie('x_auth', user.token)
                 .status(200)
                 .json({
                     loginSuccess:true
