@@ -39,6 +39,7 @@ app.post('/api/users/register', (req, res) =>{
     
     const user = new User(req.body);
     user.save((err, doc) => {
+
         if(err) return res.json ({success: false, err});
         res.status(200).json({
             success: true,
@@ -53,6 +54,7 @@ app.post('/api/user/login', (req, res) => {
     
     //find-email
     User.findOne({email: req.body.email}, (err, user) => {
+
         if(!user)
         return res.json({
             loginSuccess: false,
@@ -82,12 +84,14 @@ app.post('/api/user/login', (req, res) => {
 });
 
 app.get('/api/user/logout', auth, (req, res) => {
+    
     User.findOneAndUpdate({_id: req.user._id}, { token:"" }, (err, doc) =>{
         if(err) return res.json({ success: false, err });
         return res.status(200).send({
             success: true
         });
     });
+
 });
 
 const port = process.env.PORT || 5000
