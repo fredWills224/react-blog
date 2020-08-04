@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/user_actions'
+import { loginUser } from '../../actions/user_actions';
+import { Link } from 'react-router-dom';
 
 class RegisterLogin extends Component {
     
@@ -16,9 +17,7 @@ class RegisterLogin extends Component {
     
 
     handleChange = event =>{
-
         this.setState({ [event.target.name] : event.target.value });
-
     }
 
     submitForm = event => {
@@ -81,7 +80,7 @@ class RegisterLogin extends Component {
                                     className="validate"
                                 />
 
-                                <label htmlFor="email">Email</label>
+                                <label className="active" htmlFor="email">Email</label>
                                 <span
                                     className="helper-text"
                                     data-error="invalid email"
@@ -104,7 +103,7 @@ class RegisterLogin extends Component {
                                     className="validate"
                                 />
 
-                                <label htmlFor="email">Password</label>
+                                <label className="active" htmlFor="password">Password</label>
                                 <span
                                     className="helper-text"
                                     data-error="invalid password"
@@ -122,7 +121,7 @@ class RegisterLogin extends Component {
 
                         <div className="row">
                             <div className="col s12">
-
+                                
                                 <button 
                                     className="btn waves-effect red lighten-2"
                                     type="submit"
@@ -130,7 +129,18 @@ class RegisterLogin extends Component {
                                     onClick={this.submitForm}>
                                     Login
                                 </button>
-
+                                &nbsp;
+                                &nbsp;
+                                <Link to="/register">                                
+                                    <button 
+                                        className="btn waves-effect red lighten-2"
+                                        type="submit"
+                                        name="action"
+                                        >
+                                        Sign Up
+                                    </button>
+                                </Link>
+                            
                             </div>
                         </div>
 
