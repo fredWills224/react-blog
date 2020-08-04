@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { registerUser } from '../../actions/user_actions';
+import { connect } from 'react-redux';
 
 export class Register extends Component {
 
@@ -74,6 +75,8 @@ export class Register extends Component {
             passwordConfirmation: this.state.passwordConfirmation,
         }
 
+        console.log(dataToSubmit);
+
         if(this.isFormValid()){
             
             this.setState({ errors: [] });
@@ -86,7 +89,7 @@ export class Register extends Component {
                     // }else{
 
                     // }
-                    
+
                 })
             ;
         
@@ -224,4 +227,4 @@ export class Register extends Component {
     }
 }
 
-export default Register;
+export default connect()(Register);
