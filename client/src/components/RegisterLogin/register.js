@@ -1,24 +1,97 @@
 import React, { Component } from 'react'
-
-
+import { registerUser } from '../../actions/user_actions';
 
 export class Register extends Component {
 
     state = {
+
         firstName:"",
         lastName:"",
         email: "",
         password: "",
         passwordConfirmation:"",
         errors: [""]
+    
+    };
+
+    handleChange = event =>{
+        this.setState({ [event.target.name] : event.target.value });
     }
 
     displayErrors = errors => 
         errors.map((error, i) => <p key={i} >{error}</p>)
     ;
 
-    handleChange = event =>{
-        this.setState({ [event.target.name] : event.target.value });
+    isFormValid = () => {
+
+        let errors = [];
+        let error;
+
+        if(this.isFormEmpty(this.state)){
+            error = { message: "Fill in all fields" };
+            this.setState({ errors : errors.concat(error) });
+        }else if(!this.isPasswordValid(this.state)){
+            error = { message: "Password is invalid"};
+            this.setState({ errors: errors.concat(error) });
+        }else{
+            return true;
+        }
+        
+    }
+
+    isPasswordValid = ({password, passwordConfirmation}) => {
+
+        if(password.length<6 || passwordConfirmation<6){
+            return false;
+        }else if(password !== passwordConfirmation){
+            return false;
+        }else{
+            return true;
+        }
+
+    }
+
+    isFormEmpty = ({ firstName, lastName, email, password, passwordConfirmation}) => {
+        
+        return(
+            !firstName.length ||
+            !lastName.length ||
+            !email.length ||
+            !password.length ||
+            !passwordConfirmation
+        );
+    
+    }
+
+    submitForm = event => {
+        
+        event.preventDefault();
+        let dataToSubmit = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+            passwordConfirmation: this.state.passwordConfirmation,
+        }
+
+        if(this.isFormValid()){
+            
+            this.setState({ errors: [] });
+            this.props.dispatch(registerUser(dataToSubmit))
+                .then(response =>{
+                    
+                    console.log(response);
+                    // if(response.payload.success){
+
+                    // }else{
+
+                    // }
+                    
+                })
+            ;
+        
+        }
+
     }
 
     render() {
