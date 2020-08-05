@@ -75,24 +75,29 @@ export class Register extends Component {
             passwordConfirmation: this.state.passwordConfirmation,
         }
 
-        console.log(dataToSubmit);
-
         if(this.isFormValid()){
             
             this.setState({ errors: [] });
             this.props.dispatch(registerUser(dataToSubmit))
                 .then(response =>{
-                    
-                    console.log(response);
-                    // if(response.payload.success){
 
-                    // }else{
-
-                    // }
-
+                    if(response.payload.success){
+                        this.props.history.push('/login');
+                    }else{
+                        this.setState({
+                            errors: this.state.errors.concat("your attempt to send data to DB failed")
+                        });
+                    }
+                })
+                .catch(err =>{
+                    this.setState({
+                        errors: this.state.errors.concat(err)
+                    });
                 })
             ;
         
+        }else{
+            console.error("Form is not valid");
         }
 
     }
