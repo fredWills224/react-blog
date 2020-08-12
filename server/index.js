@@ -28,7 +28,7 @@ app.get('/api/users/auth', auth, (req, res) =>{
         _id: req._id,
         isAuth: true,
         email: req.user.email,
-        name: req.user.name,
+        firstName: req.user.firstName,
         lastName: req.user.lastName,
         role: req.user.role
     });
