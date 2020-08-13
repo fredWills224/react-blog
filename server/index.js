@@ -25,14 +25,12 @@ app.get('/', (req, res)=>{
 app.get('/api/users/auth', auth, (req, res) =>{
     
     res.status(200).json({
-
         _id: req._id,
         isAuth: true,
         email: req.user.email,
         firstName: req.user.firstName,
         lastName: req.user.lastName,
         role: req.user.role
-        
     });
 
 });
