@@ -70,6 +70,7 @@ app.post('/api/users/login', (req, res) => {
 
         //generate-token
         user.generateToken((err, user) =>{
+
             if(err) return res.status(400).send(err);
             res.cookie('x_auth', user.token)
                 .status(200)
@@ -77,6 +78,7 @@ app.post('/api/users/login', (req, res) => {
                     loginSuccess:true
                 })
             ;
+            
         });
 
     });
